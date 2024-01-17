@@ -1,0 +1,17 @@
+ERROR - main.py - 2024-01-17 16:21:24,955 - Traceback (most recent call last):
+  File "/group-volume/orc_srib/gajender.s/Diffusion_model_training/ddrm/main.py", line 164, in main
+    runner.sample()
+  File "/group-volume/orc_srib/gajender.s/Diffusion_model_training/ddrm/runners/diffusion.py", line 163, in sample
+    self.sample_sequence(model, cls_fn)
+  File "/group-volume/orc_srib/gajender.s/Diffusion_model_training/ddrm/runners/diffusion.py", line 286, in sample_sequence
+    pinv_y_0 = H_funcs.H_pinv(y_0).view(y_0.shape[0], config.data.channels, self.config.data.image_size, self.config.data.image_size)
+  File "/group-volume/orc_srib/gajender.s/Diffusion_model_training/ddrm/functions/svd_replacement.py", line 69, in H_pinv
+    return self.V(self.add_zeros(temp))
+  File "/group-volume/orc_srib/gajender.s/Diffusion_model_training/ddrm/functions/svd_replacement.py", line 188, in V
+    patches[:, :, :, idx+1] = temp[:, (self.channels*self.y_dim**2+idx)::self.ratio**2-1].view(vec.shape[0], self.channels, -1)
+RuntimeError: The expanded size of the tensor (4096) must match the existing size (69632) at non-singleton dimension 2.  Target sizes: [1, 3, 4096].  Tensor sizes: [3, 69632]
+
+
+
+   # y_0 = H_funcs.H(x_orig)
+            # y_0 = y_0 + sigma_0 * torch.randn_like(y_0)
